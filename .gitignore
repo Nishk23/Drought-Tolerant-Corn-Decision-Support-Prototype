@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+dist/
+build/
+.coverage
+.coverage.*
+.pytest_cache/
+.mypy_cache/
+.pytype/
+.ruff_cache/
+.cache/
+
+# Environments
+.env
+.venv/
+venv/
+env/
+ENV/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Editor/OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Generated outputs
+/drought_corn_prototype/outputs/
