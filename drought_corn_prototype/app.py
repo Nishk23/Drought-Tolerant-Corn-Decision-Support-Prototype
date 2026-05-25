@@ -88,7 +88,7 @@ fig_label = px.bar(
     x='drought_stress_label',
     y='count',
     color='drought_stress_label',
-    color_discrete_map={'Normal': '#1f77b4', 'Moderate Stress': '#ff7f0e', 'Severe Stress': '#d62728'},
+    color_discrete_map={'Normal': '#2ca02c', 'Moderate Stress': '#ff7f0e', 'Severe Stress': '#d62728'},
     title='Distribution of drought stress labels',
 )
 fig_label.update_layout(showlegend=False, margin=dict(l=20, r=20, t=50, b=20))
@@ -101,8 +101,8 @@ fig_scatter = px.scatter(
     x='rainfall_mm',
     y='soil_moisture_pct',
     color='drought_stress_label',
-    color_discrete_map={'Normal': '#1f77b4', 'Moderate Stress': '#ff7f0e', 'Severe Stress': '#d62728'},
-    title='Rainfall versus soil moisture by drought stress label',
+    color_discrete_map={'Normal': '#2ca02c', 'Moderate Stress': '#ff7f0e', 'Severe Stress': '#d62728'},
+    title='Prototype: Drought Labels from Rainfall & Soil Moisture',
     hover_data=['variety_id', 'location', 'year', 'yield_t_ha'],
     opacity=0.72,
 )

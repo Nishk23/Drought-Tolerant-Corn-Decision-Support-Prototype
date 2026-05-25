@@ -13,7 +13,8 @@ from sklearn.preprocessing import OneHotEncoder
 
 RANDOM_SEED = 42
 STRESS_ORDER = ['Normal', 'Moderate Stress', 'Severe Stress']
-STRESS_COLORS = {'Normal': '#1f77b4', 'Moderate Stress': '#ff7f0e', 'Severe Stress': '#d62728'}
+# Updated colors: Normal=green, Moderate=orange, Severe=red
+STRESS_COLORS = {'Normal': '#2ca02c', 'Moderate Stress': '#ff7f0e', 'Severe Stress': '#d62728'}
 
 
 def safe_one_hot_encoder():
@@ -230,7 +231,7 @@ def save_rainfall_vs_soil_moisture(frame, fig_dir):
             color=STRESS_COLORS[label],
             edgecolors='none',
         )
-    ax.set_title('Rainfall versus soil moisture')
+    ax.set_title('Prototype: Drought Labels from Rainfall & Soil Moisture')
     ax.set_xlabel('Rainfall (mm)')
     ax.set_ylabel('Soil moisture (%)')
     ax.legend(loc='best')
