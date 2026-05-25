@@ -1,0 +1,31 @@
+variety_id,predicted_drought_tolerance_score,average_yield_under_stress,yield_stability_score,main_strength,recommended_environment,suggested_action
+V011,37.9,8.9,71.4,Deep-rooted adaptation,Dry-site and low-rainfall trials,Advance
+V018,36.9,8.7,70.0,Genetic drought tolerance,Broad rainfed environments,Advance
+V012,36.9,8.6,69.5,Stay-green canopy retention,"Hot, late-season stress environments",Advance
+V008,36.8,8.8,72.3,Stay-green canopy retention,"Hot, late-season stress environments",Advance
+V013,36.1,8.8,71.1,Stay-green canopy retention,"Hot, late-season stress environments",Advance
+V005,36.0,8.8,69.3,Stay-green canopy retention,"Hot, late-season stress environments",Advance
+V017,35.9,8.6,71.5,Deep-rooted adaptation,Dry-site and low-rainfall trials,Advance
+V004,35.3,8.5,69.5,Deep-rooted adaptation,Dry-site and low-rainfall trials,Advance
+V026,35.2,8.4,67.4,Deep-rooted adaptation,Dry-site and low-rainfall trials,Retest under dry-site trials
+V023,35.0,8.7,70.9,Stay-green canopy retention,"Hot, late-season stress environments",Retest under dry-site trials
+V001,35.0,8.7,68.5,Stay-green canopy retention,"Hot, late-season stress environments",Retest under dry-site trials
+V007,34.8,8.5,65.8,Stay-green canopy retention,"Hot, late-season stress environments",Retest under dry-site trials
+V030,34.7,8.8,69.8,Stay-green canopy retention,"Hot, late-season stress environments",Retest under dry-site trials
+V021,34.5,8.5,68.2,Genetic drought tolerance,Broad rainfed environments,Retest under dry-site trials
+V006,34.3,8.5,67.0,Stay-green canopy retention,"Hot, late-season stress environments",Retest under dry-site trials
+V028,34.3,8.6,69.7,Stay-green canopy retention,"Hot, late-season stress environments",Monitor
+V009,34.0,8.2,64.8,Stay-green canopy retention,"Hot, late-season stress environments",Monitor
+V015,33.7,8.4,66.9,Deep-rooted adaptation,Dry-site and low-rainfall trials,Monitor
+V003,33.4,8.3,67.0,Stay-green canopy retention,"Hot, late-season stress environments",Monitor
+V010,33.3,8.3,65.0,Genetic drought tolerance,Broad rainfed environments,Monitor
+V019,33.2,8.1,63.9,Deep-rooted adaptation,Dry-site and low-rainfall trials,Monitor
+V020,32.8,8.4,65.9,Stay-green canopy retention,"Hot, late-season stress environments",Do not prioritize
+V029,32.6,8.1,63.2,Stay-green canopy retention,"Hot, late-season stress environments",Do not prioritize
+V014,32.1,7.7,59.6,Genetic drought tolerance,Broad rainfed environments,Do not prioritize
+V025,31.9,7.7,60.5,Stay-green canopy retention,"Hot, late-season stress environments",Do not prioritize
+V027,31.8,8.0,62.1,Genetic drought tolerance,Broad rainfed environments,Do not prioritize
+V024,31.3,8.0,63.6,Genetic drought tolerance,Broad rainfed environments,Do not prioritize
+V002,31.2,7.4,57.4,Stay-green canopy retention,"Hot, late-season stress environments",Do not prioritize
+V022,30.9,7.9,61.4,Deep-rooted adaptation,Dry-site and low-rainfall trials,Do not prioritize
+V016,30.9,7.5,59.3,Stay-green canopy retention,"Hot, late-season stress environments",Do not prioritize
