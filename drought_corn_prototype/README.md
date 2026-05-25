@@ -1,67 +1,92 @@
 # Drought-Tolerant Corn Decision Support Prototype
 
-This project is a lightweight, presentation-ready proof of concept for a 10-minute KWS Assessment Center talk on how to structure a data science workflow for drought-tolerant corn.
+## Overview
 
-It uses synthetic representative data only. It does not rely on real KWS proprietary trial, breeding, genomic, or weather data, and it should not be treated as a validated production model.
+This repository provides a compact prototype for decision support focused on evaluating and ranking corn varieties under drought conditions. It demonstrates a reproducible data pipeline, exploratory analysis, a basic modeling workflow, and report generation to help users explore variety responses to drought scenarios.
 
-## What is included
+The materials are intended for demonstration and experimentation rather than validated, production-ready deployment.
 
-- Synthetic trial data with multiple varieties, locations, years, drought stress levels, soil types, weather variables, remote-sensing indicators, and trait proxies.
-- An end-to-end Jupyter Notebook that creates the data, labels drought stress, runs exploratory analysis, trains a Random Forest regressor, evaluates performance, explains the drivers, and builds a breeder-ready ranking.
-- Clean PNG figures suitable for PowerPoint slides.
-- CSV outputs for the synthetic dataset, model metrics, and breeder ranking.
-- A simple Streamlit dashboard for interactive exploration.
+## What's Included
 
-## Why synthetic data
+- Synthetic example trial data and a clear example schema
+- Jupyter notebook detailing the workflow and visual analyses
+- Scripts to run the pipeline and produce tabular and visual outputs
+- A minimal web app to browse generated outputs interactively
 
-The goal is to demonstrate project logic and decision support structure without claiming access to real field, breeding, genomic, or weather data. The synthetic dataset is designed to be realistic enough for communication and workflow demonstration, not scientific validation.
+## Repository Structure
 
-## Project workflow
+- `drought_corn_prototype/`
+	- `app.py` — Minimal app to preview outputs interactively.
+	- `build_prototype.py` — Runs data prep, model training, and report generation.
+	- `requirements.txt` — Python package dependencies.
+	- `data/synthetic_corn_trials.csv` — Example dataset used for demonstrations.
+	- `notebooks/01_drought_corn_prototype.ipynb` — Exploratory notebook with code and narrative.
+	- `outputs/` — Generated results: figures and summary tables.
 
-1. Generate synthetic trial records across varieties, locations, and years.
-2. Apply rule-based drought stress labels: Normal, Moderate Stress, and Severe Stress.
-3. Engineer drought-related features from weather, soil, remote sensing, and trait proxies.
-4. Train a Random Forest regressor to predict drought tolerance score.
-5. Validate on the most recent year and on a simple unseen-location split.
-6. Produce feature importance and breeder-ready recommendations.
+## Quickstart
 
-## How to run the notebook
-
-From the repository root:
+1. Create and activate a virtual environment, then install dependencies:
 
 ```bash
+python3 -m venv .venv
+source .venv/bin/activate
 pip install -r drought_corn_prototype/requirements.txt
-jupyter notebook drought_corn_prototype/notebooks/01_drought_corn_prototype.ipynb
 ```
 
-Run all cells to regenerate:
-
-- `data/synthetic_corn_trials.csv`
-- `outputs/tables/model_metrics.csv`
-- `outputs/tables/variety_ranking.csv`
-- `outputs/tables/feature_importance.csv`
-- `outputs/figures/*.png`
-
-## How to run the Streamlit app
-
-After the notebook has generated the outputs:
+2. Run the pipeline to generate outputs:
 
 ```bash
-streamlit run drought_corn_prototype/app.py
+python drought_corn_prototype/build_prototype.py
 ```
 
-The app reads the saved synthetic data and presentation assets.
+3. Explore the step-by-step analysis in the notebook:
 
-## Slide mapping suggestion
+```bash
+jupyter lab drought_corn_prototype/notebooks/01_drought_corn_prototype.ipynb
+```
 
-- Slide 1: Project purpose and disclaimer.
-- Slide 2: Synthetic data design and drought labeling logic.
-- Slide 3: Exploratory visuals showing drought distribution, rainfall vs soil moisture, and yield by stress level.
-- Slide 4: Model validation on unseen year and unseen location.
-- Slide 5: Feature importance and key drought drivers.
-- Slide 6: Breeder-ready variety ranking and suggested actions.
-- Slide 7: Closing note on limitations and next steps.
+4. (Optional) Launch the lightweight app to view results interactively:
 
-## Presentation note
+```bash
+FLASK_APP=drought_corn_prototype/app.py flask run
+# open http://127.0.0.1:5000 in your browser
+```
 
-This prototype is intentionally conservative. It shows how a decision-support pipeline could be structured, but it does not claim production readiness, biological certainty, or direct transferability to KWS proprietary data.
+Notes:
+
+- The example dataset is synthetic and provided for demonstration. Replace `data/synthetic_corn_trials.csv` with real trial data to run with your own inputs.
+- `build_prototype.py` writes outputs to `drought_corn_prototype/outputs/`.
+
+## Data Requirements
+
+The prototype expects a tidy CSV containing trial observations by variety, with columns for identifiers (variety, site, year), environmental descriptors, and response variables such as yield or drought-score proxies. The notebook shows example column names and preprocessing steps.
+
+When using your own data, ensure consistent column names or update the preprocessing code in `build_prototype.py`.
+
+## Outputs
+
+After running the pipeline, check `drought_corn_prototype/outputs/` for:
+
+- `tables/variety_ranking.csv` — ranked varieties by selected performance metric
+- `tables/feature_importance.csv` — feature importance or driver summaries
+- `tables/model_metrics.csv` — model evaluation numbers (e.g., RMSE, R2)
+- `figures/` — visualizations generated during analysis
+
+## Extending the Prototype
+
+Ideas for next steps:
+
+- Add data validation and configuration to support multiple input schemas
+- Introduce more advanced modeling pipelines and cross-validation
+- Add automated tests and a CI workflow to ensure reproducibility
+- Replace the minimal app with a more feature-rich dashboard if needed
+
+Contributions are welcome via pull requests; please include a description of changes and any test updates.
+
+## License
+
+This repository is provided as an illustrative prototype. Add an appropriate open-source license if you plan to publish or distribute.
+
+## Contact
+
+Open an issue in this repository for questions, bug reports, or enhancement requests.
