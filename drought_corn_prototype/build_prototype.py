@@ -15,6 +15,32 @@ RANDOM_SEED = 42
 STRESS_ORDER = ['Normal', 'Moderate Stress', 'Severe Stress']
 # Updated colors: Normal=green, Moderate=orange, Severe=red
 STRESS_COLORS = {'Normal': '#2ca02c', 'Moderate Stress': '#ff7f0e', 'Severe Stress': '#d62728'}
+KWS_GREEN = '#007a3d'
+KWS_ORANGE = '#f28c28'
+FEATURE_LABELS = {
+    'moisture_stress_index': 'Moisture Stress Index',
+    'vegetation_health_index': 'Vegetation Health Index',
+    'heat_risk_index': 'Heat Risk Index',
+    'rainfall_mm': 'Rainfall',
+    'heat_stress_days': 'Heat Stress Days',
+    'trait_resilience_score': 'Trait Resilience Score',
+    'rainfall_deficit': 'Rainfall Deficit',
+    'canopy_temperature_c': 'Canopy Temperature',
+    'genetic_drought_score': 'Genetic Drought Score',
+    'root_depth_score': 'Root Depth Score',
+    'biomass_index': 'Biomass Index',
+    'stay_green_score': 'Stay-Green Score',
+}
+FEATURE_IMPORTANCE_ORDER = [
+    'moisture_stress_index',
+    'vegetation_health_index',
+    'heat_risk_index',
+    'rainfall_mm',
+    'heat_stress_days',
+    'trait_resilience_score',
+    'rainfall_deficit',
+    'canopy_temperature_c',
+]
 
 
 def safe_one_hot_encoder():
@@ -256,13 +282,21 @@ def save_yield_by_stress_level(frame, fig_dir):
 
 
 def save_feature_importance_plot(aggregated_importance, fig_dir):
-    top = aggregated_importance.head(12).sort_values('importance', ascending=True)
+    display = aggregated_importance[aggregated_importance['base_feature'].isin(FEATURE_IMPORTANCE_ORDER)].copy()
+    if display.empty:
+        return
+    display['label'] = display['base_feature'].map(FEATURE_LABELS).fillna(display['base_feature'])
+    top_feature = display.sort_values('importance', ascending=False).iloc[0]['base_feature']
+    display = display.sort_values('importance', ascending=True)
+    colors = [KWS_ORANGE if feature == top_feature else KWS_GREEN for feature in display['base_feature']]
     fig, ax = plt.subplots(figsize=(8.5, 6.5))
-    ax.barh(top['base_feature'], top['importance'], color='#2563eb')
-    ax.set_title('Random Forest feature importance')
-    ax.set_xlabel('Importance')
-    ax.set_ylabel('Feature')
-    fig.tight_layout()
+    ax.barh(display['label'], display['importance'], color=colors)
+    ax.set_title('Key Drivers of Drought Tolerance Prediction')
+    ax.set_xlabel('Relative importance')
+    ax.set_ylabel('')
+    caption = 'Insight: water availability and vegetation health are the strongest signals for drought tolerance.'
+    fig.tight_layout(rect=[0, 0.06, 1, 1])
+    fig.text(0.5, 0.01, caption, ha='center', va='bottom', fontsize=9, color='#4b5563')
     fig.savefig(fig_dir / 'feature_importance.png', dpi=220, bbox_inches='tight')
     plt.close(fig)
 

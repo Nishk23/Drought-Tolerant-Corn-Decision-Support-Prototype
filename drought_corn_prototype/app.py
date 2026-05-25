@@ -50,6 +50,32 @@ importance = load_importance().sort_values('importance', ascending=False)
 
 years = sorted(df['year'].unique().tolist())
 locations = sorted(df['location'].unique().tolist())
+KWS_GREEN = '#007a3d'
+KWS_ORANGE = '#f28c28'
+FEATURE_LABELS = {
+    'moisture_stress_index': 'Moisture Stress Index',
+    'vegetation_health_index': 'Vegetation Health Index',
+    'heat_risk_index': 'Heat Risk Index',
+    'rainfall_mm': 'Rainfall',
+    'heat_stress_days': 'Heat Stress Days',
+    'trait_resilience_score': 'Trait Resilience Score',
+    'rainfall_deficit': 'Rainfall Deficit',
+    'canopy_temperature_c': 'Canopy Temperature',
+    'genetic_drought_score': 'Genetic Drought Score',
+    'root_depth_score': 'Root Depth Score',
+    'biomass_index': 'Biomass Index',
+    'stay_green_score': 'Stay-Green Score',
+}
+FEATURE_IMPORTANCE_ORDER = [
+    'moisture_stress_index',
+    'vegetation_health_index',
+    'heat_risk_index',
+    'rainfall_mm',
+    'heat_stress_days',
+    'trait_resilience_score',
+    'rainfall_deficit',
+    'canopy_temperature_c',
+]
 stress_labels = ['Normal', 'Moderate Stress', 'Severe Stress']
 
 st.sidebar.header('Filters')
@@ -111,18 +137,29 @@ st.plotly_chart(fig_scatter, use_container_width=True)
 
 
 st.subheader('Feature importance')
-top_importance = importance.head(12)
+feature_column = 'base_feature' if 'base_feature' in importance.columns else 'feature'
+top_importance = importance[importance[feature_column].isin(FEATURE_IMPORTANCE_ORDER)].copy()
+top_importance['label'] = top_importance[feature_column].map(FEATURE_LABELS).fillna(top_importance[feature_column])
+top_feature = top_importance.sort_values('importance', ascending=False).iloc[0][feature_column]
+top_importance['is_top'] = top_importance[feature_column] == top_feature
+top_importance = top_importance.sort_values('importance', ascending=True)
 fig_importance = px.bar(
-    top_importance.sort_values('importance', ascending=True),
+    top_importance,
     x='importance',
-    y='feature',
+    y='label',
     orientation='h',
-    title='Key drivers of drought tolerance from the trained model',
-    color='importance',
-    color_continuous_scale=['#dbeafe', '#2563eb'],
+    title='Key Drivers of Drought Tolerance Prediction',
+    color='is_top',
+    color_discrete_map={True: KWS_ORANGE, False: KWS_GREEN},
 )
-fig_importance.update_layout(coloraxis_showscale=False, margin=dict(l=20, r=20, t=50, b=20))
+fig_importance.update_layout(
+    showlegend=False,
+    xaxis_title='Relative importance',
+    yaxis_title=None,
+    margin=dict(l=20, r=20, t=50, b=20),
+)
 st.plotly_chart(fig_importance, use_container_width=True)
+st.caption('Insight: water availability and vegetation health are the strongest signals for drought tolerance.')
 
 
 st.subheader('Top recommended varieties')
